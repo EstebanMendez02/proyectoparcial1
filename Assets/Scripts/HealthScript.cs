@@ -3,20 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class ArtScore : MonoBehaviour
+public class HealthScript : MonoBehaviour
 {
     TextMeshProUGUI textMesh;
-    int score = 0;
-
+    public int healthUI = 3;
     void Start()
     {
         textMesh = GetComponent<TextMeshProUGUI>();
     }
 
-    public void AddPoints(int points)
+    public void RemoveHealth(int damage)
     {
-        Debug.Log("arte");
-        score += points;
-        textMesh.text = $"Arte: {score} / 5";
+        healthUI -= damage;
+        textMesh.text = $"Vida: {healthUI} / 3";
     }
+    
 }

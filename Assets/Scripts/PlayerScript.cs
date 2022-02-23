@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerScript : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class PlayerScript : MonoBehaviour
     float speed = 3.0f;
     [SerializeField]
     float jumpForce = 7.0f;
+
     [SerializeField, Range(0.01f, 10f)]
     float rayDistance = 2f;
     [SerializeField]
@@ -22,6 +24,14 @@ public class PlayerScript : MonoBehaviour
     SpriteRenderer sprR;
     Animator anim;
 
+    [SerializeField]
+    ArtScore score;
+
+    [SerializeField]
+    HealthScript hs;
+    int damage = 1;
+    
+    IEnumerator dead;
     void Awake()
     {
         gameInputs = new GameInputs();
@@ -41,6 +51,7 @@ public class PlayerScript : MonoBehaviour
         rb2D = GetComponent<Rigidbody2D>();
         sprR = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
+        Debug.Log("se creo el pex");
         gameInputs.Gameplay.Jump.performed += _=> Jump();
         gameInputs.Gameplay.Jump.canceled += _=> JumpCanceled();
     }
@@ -51,6 +62,12 @@ public class PlayerScript : MonoBehaviour
         if(!IsGrounding) //sirve ahorita, alomejor cuando incluya animación de salto habrá q cambiarla.
         {
             anim.SetFloat("Blend", 0);
+        }
+
+        if(hs.healthUI <= 0)
+        {
+            dead = TimeDead();
+            StartCoroutine(dead);
         }
         
     }
@@ -97,10 +114,29 @@ public class PlayerScript : MonoBehaviour
         if(col.CompareTag("art"))
         {
             ArtScript art = col.GetComponent<ArtScript>();
+            score.AddPoints(art.GetPoints);
             Destroy(col.gameObject);
+        }
+        if(col.CompareTag("vacio"))
+        {
+            SceneManager.LoadScene(1);
+        }
+        if(col.CompareTag("meta"))
+        {
+            SceneManager.LoadScene(2);
         }
     }
 
-    public void RunAnimationDamage() => anim.SetTrigger("damage");
+    public void RunAnimationDamage()
+    {
+        anim.SetTrigger("damage");
+        hs.RemoveHealth(damage);
+    } 
+
+    IEnumerator TimeDead()
+    {
+        yield return new WaitForSeconds(1f);
+        SceneManager.LoadScene(1);
+    }
 
 }
