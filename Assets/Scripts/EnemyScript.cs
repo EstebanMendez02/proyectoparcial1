@@ -145,7 +145,10 @@ public class EnemyScript : MonoBehaviour
     }
     void Update()
     {
-    
+        if(top)
+        {
+            Debug.Log("arriba");
+        }
     }
 
     public void MakeDamage()

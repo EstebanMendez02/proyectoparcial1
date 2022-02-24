@@ -6,7 +6,7 @@ using TMPro;
 public class ArtScore : MonoBehaviour
 {
     TextMeshProUGUI textMesh;
-    int score = 0;
+    public int score = 0;
 
     void Start()
     {
@@ -17,6 +17,6 @@ public class ArtScore : MonoBehaviour
     {
         Debug.Log("arte");
         score += points;
-        textMesh.text = $"Arte: {score} / 5";
+        textMesh.text = $"{score} / 5";
     }
 }
