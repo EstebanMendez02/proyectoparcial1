@@ -27,13 +27,17 @@ public class EnemyScript : MonoBehaviour
     [SerializeField]
     Vector3 rayOrigin, rayOrigin2, rayOrigin3;
 
+    /*AudioSource aud;
+    [SerializeField]
+    AudioClip walkEnemySFX;
+    [SerializeField, Range(0.1f, 2f)]
+    float walkEnemyTimeLimit = 1f;*/
+
 
 
 //IENUMERATORS
-    IEnumerator patroling;
-    IEnumerator idling;
-    IEnumerator attack;
-    IEnumerator lastRoutine;
+    IEnumerator patroling, idling, attack, lastRoutine;
+    
     [SerializeField] 
     AnimationClip attackClip;
     [SerializeField]
@@ -48,7 +52,7 @@ public class EnemyScript : MonoBehaviour
         anim = GetComponent<Animator>();
         sprR = GetComponent<SpriteRenderer>();
         ps = GetComponent<PlayerScript>();
-
+        //aud = GetComponent<AudioSource>();
     }
 
     void Start()
@@ -82,9 +86,6 @@ public class EnemyScript : MonoBehaviour
                 rayDistance = 0f;
                 StartIdling();
                 yield break;
-            }else
-            {
-                
             }
             yield return null;
         }    
@@ -98,25 +99,23 @@ public class EnemyScript : MonoBehaviour
 
     IEnumerator IdlingRoutine()
     {
-        Debug.Log("me paro");
+        //Debug.Log("me paro");
         anim.SetFloat("Blend", 0f);
         yield return new WaitForSeconds(idlingTime);
         StartPatroling();
-        Debug.Log("entra");
+        //Debug.Log("entra");
         yield return new WaitForSeconds(idlingTime);
-        Debug.Log("yaesperé");
+        //Debug.Log("yaesperé");
         rayDistance = 0.6f;
     }
 
     void StartPatroling()
     {   
-        Debug.Log("sigo");
+        //Debug.Log("sigo");
         direction = direction == Vector2.right ? Vector2.left : Vector2.right;
         sprR.flipX = FlipSpriteX;
         patroling = PatrolingRoutine();
         StartCoroutine(patroling);
-        
-        
     }
 
 //ataque
@@ -136,7 +135,6 @@ public class EnemyScript : MonoBehaviour
         StartCoroutine(lastRoutine);
         isAttacking = false;
     }
-
     void StartAttack()
     {
         attack = AttackingRoutine();
@@ -145,10 +143,7 @@ public class EnemyScript : MonoBehaviour
     }
     void Update()
     {
-        if(top)
-        {
-            Debug.Log("arriba");
-        }
+        
     }
 
     public void MakeDamage()

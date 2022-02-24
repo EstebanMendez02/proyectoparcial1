@@ -31,7 +31,14 @@ public class PlayerScript : MonoBehaviour
     HealthScript hs;
     int damage = 1;
     
-    IEnumerator dead;
+    IEnumerator dead, walk, timer;
+    float walkTimer = 0f;
+    [SerializeField, Range(0.1f, 2f)]
+    float walkTimeLimit = 1f;
+
+    AudioSource aud;
+    [SerializeField]
+    AudioClip walkSFX, jumpSFX, pickupSFX, hitSFX, winSFX, deadSFX;
     void Awake()
     {
         gameInputs = new GameInputs();
@@ -51,8 +58,13 @@ public class PlayerScript : MonoBehaviour
         rb2D = GetComponent<Rigidbody2D>();
         sprR = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
+        aud = GetComponent<AudioSource>();
         gameInputs.Gameplay.Jump.performed += _=> Jump();
         gameInputs.Gameplay.Jump.canceled += _=> JumpCanceled();
+
+        walkTimer = walkTimeLimit;
+        gameInputs.Gameplay.AxisX.performed += _=>  StartWalk();
+        gameInputs.Gameplay.AxisX.canceled += _=>  StopWalk();
     }
 
     void Update()
@@ -68,9 +80,9 @@ public class PlayerScript : MonoBehaviour
             dead = TimeDead();
             StartCoroutine(dead);
         }
-        
     }
 
+    
     void FixedUpdate()
     {
         rb2D.position += (Vector2.right * Axis.x * speed * Time.fixedDeltaTime);
@@ -80,6 +92,7 @@ public class PlayerScript : MonoBehaviour
     {
         if(IsGrounding || GameManager.instance.GetEnemy.top)
         {
+            aud.PlayOneShot(jumpSFX, 1f);
             rb2D.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
             anim.SetTrigger("jump");
         }
@@ -95,6 +108,31 @@ public class PlayerScript : MonoBehaviour
         anim.SetFloat("Blend", Mathf.Abs(Axis.x));
         anim.SetBool("ground", IsGrounding);
     }
+
+    IEnumerator WalkRoutine()
+    {
+        while(true)
+        {
+            if(IsGrounding) aud.PlayOneShot(walkSFX, 0.3f);
+            yield return new WaitForSeconds(walkTimeLimit);
+        }
+    }
+
+    void StartWalk()
+    {
+        if(IsGrounding)
+        {
+            walk = WalkRoutine();
+            StartCoroutine(walk);
+        }
+        
+    }
+
+    void StopWalk()
+    {
+       StopCoroutine(walk);
+    }
+
 
     Vector2 Axis => new Vector2(gameInputs.Gameplay.AxisX.ReadValue<float>(), gameInputs.Gameplay.AxisY.ReadValue<float>());
 
@@ -112,30 +150,42 @@ public class PlayerScript : MonoBehaviour
     {
         if(col.CompareTag("art"))
         {
+            aud.PlayOneShot(pickupSFX, 1f);
             ArtScript art = col.GetComponent<ArtScript>();
             score.AddPoints(art.GetPoints);
             Destroy(col.gameObject);
         }
         if(col.CompareTag("vacio"))
         {
-            SceneManager.LoadScene(1);
+            dead = TimeDead();
+            StartCoroutine(dead);
         }
         if(col.CompareTag("meta") && (score.score>=5))
         {
-            SceneManager.LoadScene(2);
+            timer = TimerW();
+            StartCoroutine(timer);
         }
     }
 
     public void RunAnimationDamage()
     {
+        aud.PlayOneShot(hitSFX, 1f);
         anim.SetTrigger("damage");
         hs.RemoveHealth(damage);
     } 
 
     IEnumerator TimeDead()
     {
+        aud.PlayOneShot(deadSFX, 0.5f);
         yield return new WaitForSeconds(1f);
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(2);
+    }
+
+    IEnumerator TimerW()
+    {
+        aud.PlayOneShot(winSFX, 1f);
+        yield return new WaitForSeconds(1.5f);
+        SceneManager.LoadScene(3);
     }
 
 }
