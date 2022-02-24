@@ -27,19 +27,17 @@ public class EnemyScript : MonoBehaviour
     [SerializeField]
     Vector3 rayOrigin, rayOrigin2, rayOrigin3;
 
-    AudioSource aud;
+    /*AudioSource aud;
     [SerializeField]
     AudioClip walkEnemySFX;
-    /*[SerializeField, Range(0.1f, 2f)]
+    [SerializeField, Range(0.1f, 2f)]
     float walkEnemyTimeLimit = 1f;*/
 
 
 
 //IENUMERATORS
-    IEnumerator patroling;
-    IEnumerator idling;
-    IEnumerator attack;
-    IEnumerator lastRoutine;
+    IEnumerator patroling, idling, attack, lastRoutine;
+    
     [SerializeField] 
     AnimationClip attackClip;
     [SerializeField]
@@ -54,7 +52,7 @@ public class EnemyScript : MonoBehaviour
         anim = GetComponent<Animator>();
         sprR = GetComponent<SpriteRenderer>();
         ps = GetComponent<PlayerScript>();
-        aud = GetComponent<AudioSource>();
+        //aud = GetComponent<AudioSource>();
     }
 
     void Start()
@@ -73,8 +71,6 @@ public class EnemyScript : MonoBehaviour
         anim.SetFloat("Blend", 1f);
         while(true)
         {
-            //aud.PlayOneShot(walkEnemySFX, 1f);
-            //yield return new WaitForSeconds(walkEnemyTimeLimit);
             if(Attack && !isAttacking)
             {
                 isAttacking = true;
@@ -139,7 +135,6 @@ public class EnemyScript : MonoBehaviour
         StartCoroutine(lastRoutine);
         isAttacking = false;
     }
-
     void StartAttack()
     {
         attack = AttackingRoutine();
@@ -148,10 +143,7 @@ public class EnemyScript : MonoBehaviour
     }
     void Update()
     {
-        /*if(top)
-        {
-            Debug.Log("arriba");
-        }*/
+        
     }
 
     public void MakeDamage()
