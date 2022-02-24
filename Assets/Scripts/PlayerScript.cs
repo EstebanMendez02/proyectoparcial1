@@ -43,6 +43,10 @@ public class PlayerScript : MonoBehaviour
     void Awake()
     {
         gameInputs = new GameInputs();
+        rb2D = GetComponent<Rigidbody2D>();
+        sprR = GetComponent<SpriteRenderer>();
+        anim = GetComponent<Animator>();
+        aud = GetComponent<AudioSource>();
     }
 
     void OnEnable()
@@ -56,10 +60,8 @@ public class PlayerScript : MonoBehaviour
     }
     void Start()
     {
-        rb2D = GetComponent<Rigidbody2D>();
-        sprR = GetComponent<SpriteRenderer>();
-        anim = GetComponent<Animator>();
-        aud = GetComponent<AudioSource>();
+        GameManager.instance.SetPlayer(this);
+        
         gameInputs.Gameplay.Jump.performed += _=> Jump();
         gameInputs.Gameplay.Jump.canceled += _=> JumpCanceled();
 

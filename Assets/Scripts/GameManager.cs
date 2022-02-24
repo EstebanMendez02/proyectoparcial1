@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -22,10 +23,19 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        player = GameObject.FindWithTag("Player").GetComponent<PlayerScript>();
-        enemy = GameObject.FindWithTag("Enemy").GetComponent<EnemyScript>();
+        
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if(scene.buildIndex == 2)
+        {
+            player = GameObject.FindWithTag("Player").GetComponent<PlayerScript>();
+            enemy = GameObject.FindWithTag("Enemy").GetComponent<EnemyScript>();
+        }
     }
 
     public PlayerScript GetPlayer => player;
+    public void SetPlayer(PlayerScript player) => this.player = player;
     public EnemyScript GetEnemy => enemy;
 }

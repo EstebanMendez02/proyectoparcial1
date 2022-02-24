@@ -6,7 +6,7 @@ using TMPro;
 public class HealthScript : MonoBehaviour
 {
     TextMeshProUGUI textMesh;
-    public int healthUI = 3;
+    public int healthUI = 5;
     void Start()
     {
         textMesh = GetComponent<TextMeshProUGUI>();
@@ -15,7 +15,7 @@ public class HealthScript : MonoBehaviour
     public void RemoveHealth(int damage)
     {
         healthUI -= damage;
-        textMesh.text = $"{healthUI} / 3";
+        textMesh.text = $"{healthUI} / 5";
     }
     
 }
