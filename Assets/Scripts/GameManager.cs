@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
     PlayerScript player;
+    [SerializeField]
     EnemyScript enemy;
     void Awake()
     {

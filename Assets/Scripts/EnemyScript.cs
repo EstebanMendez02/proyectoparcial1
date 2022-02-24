@@ -16,16 +16,16 @@ public class EnemyScript : MonoBehaviour
     float idlingTime = 2f;
 
     [SerializeField, Range(0.1f, 5f)]
-    float rayDistance = 2f, rayDistance2 = 2f, rayDistance3 = 2f;
+    float rayDistance = 2f, rayDistance2 = 2f;
 
     [SerializeField]
-    Color rayColor = Color.white, rayColor2 = Color.red, rayColor3 = Color.blue;
+    Color rayColor = Color.white, rayColor2 = Color.red;
     [SerializeField]
     LayerMask limitLayer;
     [SerializeField]
     LayerMask playerLayer;
     [SerializeField]
-    Vector3 rayOrigin, rayOrigin2, rayOrigin3;
+    Vector3 rayOrigin, rayOrigin2;
 
     /*AudioSource aud;
     [SerializeField]
@@ -159,8 +159,7 @@ public class EnemyScript : MonoBehaviour
     bool AttackRight => Physics2D.Raycast(transform.position + rayOrigin2, Vector2.right, rayDistance2, playerLayer);
     bool collision => Physics2D.Raycast(transform.position + rayOrigin, Vector2.right, rayDistance, limitLayer) || 
     Physics2D.Raycast(transform.position + rayOrigin, Vector2.left, rayDistance, limitLayer);
-    public bool top => Physics2D.Raycast(transform.position + rayOrigin3, Vector3.up, rayDistance3, playerLayer);
-
+    
     void OnDrawGizmosSelected()
     {
         Gizmos.color = rayColor;
@@ -169,8 +168,14 @@ public class EnemyScript : MonoBehaviour
         Gizmos.color = rayColor2;
         Gizmos.DrawRay(transform.position+rayOrigin2, Vector3.right * rayDistance2);
         Gizmos.DrawRay(transform.position+rayOrigin2, Vector3.left * rayDistance2);
-        Gizmos.color = rayColor3;
-        Gizmos.DrawRay(transform.position+rayOrigin3, Vector3.up * rayDistance3);
-        
+    }
+
+    void OnTriggerEnter2D(Collider2D trig)
+    {
+        if(trig.CompareTag("Player"))
+        {
+            ps = trig.GetComponent<PlayerScript>();
+            ps.TouchingHead = true;
+        }
     }
 }

@@ -36,6 +36,7 @@ public class PlayerScript : MonoBehaviour
     [SerializeField, Range(0.1f, 2f)]
     float walkTimeLimit = 1f;
 
+    bool touchingHead = false;
     AudioSource aud;
     [SerializeField]
     AudioClip walkSFX, jumpSFX, pickupSFX, hitSFX, winSFX, deadSFX;
@@ -90,11 +91,12 @@ public class PlayerScript : MonoBehaviour
 
     void Jump()
     {
-        if(IsGrounding || GameManager.instance.GetEnemy.top)
+        if(IsGrounding) //
         {
             aud.PlayOneShot(jumpSFX, 1f);
             rb2D.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
             anim.SetTrigger("jump");
+            touchingHead = false;
         }
     }
 
@@ -137,8 +139,8 @@ public class PlayerScript : MonoBehaviour
     Vector2 Axis => new Vector2(gameInputs.Gameplay.AxisX.ReadValue<float>(), gameInputs.Gameplay.AxisY.ReadValue<float>());
 
     bool FlipSprite => Axis.x > 0 ? false : Axis.x<0 ? true : sprR.flipX;
-    bool IsGrounding => Physics2D.Raycast(transform.position + rayOrigin, Vector2.down, rayDistance, groundLayer) || GameManager.instance.GetEnemy.top;
-
+    bool IsGrounding => Physics2D.Raycast(transform.position + rayOrigin, Vector2.down, rayDistance, groundLayer) || touchingHead;
+    public bool TouchingHead {get => touchingHead; set => touchingHead = value;}
 
     void OnDrawGizmosSelected()
     {
