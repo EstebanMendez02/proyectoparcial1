@@ -51,7 +51,6 @@ public class PlayerScript : MonoBehaviour
         rb2D = GetComponent<Rigidbody2D>();
         sprR = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
-        Debug.Log("se creo el pex");
         gameInputs.Gameplay.Jump.performed += _=> Jump();
         gameInputs.Gameplay.Jump.canceled += _=> JumpCanceled();
     }
@@ -121,7 +120,7 @@ public class PlayerScript : MonoBehaviour
         {
             SceneManager.LoadScene(1);
         }
-        if(col.CompareTag("meta"))
+        if(col.CompareTag("meta") && (score.score>=5))
         {
             SceneManager.LoadScene(2);
         }

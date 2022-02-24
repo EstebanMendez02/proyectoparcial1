@@ -15,7 +15,7 @@ public class HealthScript : MonoBehaviour
     public void RemoveHealth(int damage)
     {
         healthUI -= damage;
-        textMesh.text = $"Vida: {healthUI} / 3";
+        textMesh.text = $"{healthUI} / 3";
     }
     
 }
