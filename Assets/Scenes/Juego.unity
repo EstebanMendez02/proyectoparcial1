@@ -5199,8 +5199,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.036736786, y: 0.019354701}
-  m_Size: {x: 0.595834, y: 0.9929664}
+  m_Offset: {x: -0.036736786, y: 0.025596052}
+  m_Size: {x: 0.595834, y: 0.9804837}
   m_Direction: 0
 --- !u!50 &1618463180
 Rigidbody2D:
@@ -5245,7 +5245,7 @@ MonoBehaviour:
   rayOrigin: {x: 0, y: 0, z: 0}
   score: {fileID: 982283316}
   hs: {fileID: 304293363}
-  walkTimeLimit: 0.216
+  walkTimeLimit: 0.23
   walkSFX: {fileID: 8300000, guid: 32b1e242f3a810a4d9f3a7c6e95fe455, type: 3}
   jumpSFX: {fileID: 8300000, guid: 5b648d30af71020449c30e217f5a79c5, type: 3}
   pickupSFX: {fileID: 8300000, guid: e9dd3fadafa33434186b3c1654ee45f9, type: 3}
