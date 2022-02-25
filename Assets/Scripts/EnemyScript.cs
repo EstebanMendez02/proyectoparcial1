@@ -27,14 +27,6 @@ public class EnemyScript : MonoBehaviour
     [SerializeField]
     Vector3 rayOrigin, rayOrigin2;
 
-    /*AudioSource aud;
-    [SerializeField]
-    AudioClip walkEnemySFX;
-    [SerializeField, Range(0.1f, 2f)]
-    float walkEnemyTimeLimit = 1f;*/
-
-
-
 //IENUMERATORS
     IEnumerator patroling, idling, attack, lastRoutine;
     
@@ -52,7 +44,6 @@ public class EnemyScript : MonoBehaviour
         anim = GetComponent<Animator>();
         sprR = GetComponent<SpriteRenderer>();
         ps = GetComponent<PlayerScript>();
-        //aud = GetComponent<AudioSource>();
     }
 
     void Start()
