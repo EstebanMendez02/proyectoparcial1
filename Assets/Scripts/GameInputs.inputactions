@@ -17,7 +17,7 @@
                 {
                     "name": "AxisY",
                     "type": "Button",
-                    "id": "9eecc630-fd20-4a52-9ca4-3e179b191843",
+                    "id": "68aa3cb2-dc41-49d9-9502-dd94e23e49b6",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -34,72 +34,6 @@
                 }
             ],
             "bindings": [
-                {
-                    "name": "AxisY",
-                    "id": "73ea1637-8457-4168-81e6-975b5b4b5858",
-                    "path": "1DAxis",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "AxisY",
-                    "isComposite": true,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "negative",
-                    "id": "134729a0-c466-4ec9-b63a-81f6fee02519",
-                    "path": "<Keyboard>/s",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "AxisY",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "positive",
-                    "id": "ca5cdf13-ef94-4a5f-a06f-a5206196d188",
-                    "path": "<Keyboard>/w",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "AxisY",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "1D Axis",
-                    "id": "a09ef244-84fe-4535-9faa-c69f994e8a4d",
-                    "path": "1DAxis",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "AxisY",
-                    "isComposite": true,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "negative",
-                    "id": "678998d6-78ba-41c0-8843-2dfcc89c5d4e",
-                    "path": "<Keyboard>/downArrow",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "AxisY",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "positive",
-                    "id": "2285f260-6343-4c90-a17a-24d7e87717ce",
-                    "path": "<Keyboard>/upArrow",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "AxisY",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
                 {
                     "name": "AxisX",
                     "id": "14e8cdeb-3154-462b-9358-b1dbbd90a053",
@@ -176,6 +110,72 @@
                     "action": "Jump",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "AxisY",
+                    "id": "eba4cc05-a43a-464b-be52-1471f749c97a",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "AxisY",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "729e453a-6de8-444f-9ef3-fc80dab128b4",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "AxisY",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "9cbddcce-97da-4cef-8fd1-6b777113d518",
+                    "path": "<Keyboard>/w",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "AxisY",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "1D Axis",
+                    "id": "ba665253-3917-456d-b223-7d535bc457c5",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "AxisY",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "1e8675ea-21e9-4343-b998-eae90bcabed3",
+                    "path": "<Keyboard>/downArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "AxisY",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "3f46a72f-9bdf-43d9-8ad3-c0b45281dfe0",
+                    "path": "<Keyboard>/upArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "AxisY",
+                    "isComposite": false,
+                    "isPartOfComposite": true
                 }
             ]
         }
